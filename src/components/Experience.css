@@ -1,0 +1,116 @@
+.exp__tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 5px;
+  width: fit-content;
+}
+
+.exp__tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: 0.5rem 1.2rem;
+  border-radius: 7px;
+  transition: all var(--transition);
+}
+
+.exp__tab--active {
+  background: var(--blue);
+  color: #060c1a;
+  font-weight: 600;
+}
+
+.exp__tab:hover:not(.exp__tab--active) {
+  color: var(--text);
+  background: rgba(78,168,222,0.08);
+}
+
+.exp__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.exp__timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--blue), transparent);
+}
+
+.exp__item {
+  position: relative;
+  padding-bottom: 2.2rem;
+}
+
+.exp__item:last-child { padding-bottom: 0; }
+
+.exp__dot {
+  position: absolute;
+  left: -2rem;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--blue);
+  box-shadow: 0 0 10px rgba(78,168,222,0.4);
+}
+
+.exp__body { padding-left: 0.4rem; }
+
+.exp__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.exp__role {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.exp__period {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--blue);
+  opacity: 0.8;
+}
+
+.exp__company {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+.exp__bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.exp__bullets li {
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: flex;
+  gap: 0.6rem;
+  line-height: 1.6;
+}
