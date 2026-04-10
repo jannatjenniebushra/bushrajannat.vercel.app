@@ -205,7 +205,9 @@ export default function Chatbot() {
 
   const S = {
     fab: {
-      position: "fixed", bottom: 28, right: 28,
+      position: "fixed",
+      bottom: "max(28px, env(safe-area-inset-bottom, 28px))",
+      right: 20,
       width: 56, height: 56, borderRadius: "50%",
       background: "linear-gradient(135deg, #00e5ff 0%, #00b8d4 60%, #0090a8 100%)",
       border: "none", cursor: "pointer", zIndex: 9998,
@@ -213,8 +215,12 @@ export default function Chatbot() {
       transition: "transform 0.2s ease",
     },
     window: {
-      position: "fixed", bottom: 96, right: 28,
-      width: 400, height: 560, zIndex: 9997,
+      position: "fixed",
+      bottom: 96,
+      right: 20,
+      width: "min(400px, calc(100vw - 32px))",
+      height: "min(560px, calc(100dvh - 120px))",
+      zIndex: 9997,
       display: "flex", flexDirection: "column",
       borderRadius: 20, overflow: "hidden",
       background: "rgba(10, 12, 18, 0.82)",

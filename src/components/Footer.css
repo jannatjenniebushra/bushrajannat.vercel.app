@@ -47,3 +47,12 @@
 @media (max-width: 540px) {
   .footer__inner { justify-content: center; text-align: center; }
 }
+
+@media (max-width: 480px) {
+  .footer__inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.8rem;
+  }
+}

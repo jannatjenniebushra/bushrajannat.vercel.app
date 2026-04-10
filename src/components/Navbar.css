@@ -103,8 +103,15 @@
     align-items: center;
     gap: 1.2rem;
     font-size: 1.1rem;
+    z-index: 99;
   }
 
   .navbar__links--open { display: flex; }
-  .navbar__link { font-size: 1.1rem; }
+  .navbar__link { font-size: 1.1rem; padding: 0.6rem 1.2rem; }
+  .navbar__cta { margin-top: 0.5rem; }
+
+  .navbar__burger {
+    z-index: 200;
+    position: relative;
+  }
 }

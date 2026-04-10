@@ -194,13 +194,45 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding: 6rem 0 3rem;
+  }
+
   .hero__inner {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
     text-align: center;
+    gap: 2rem;
   }
-  .hero__avatar { margin: 0 auto; }
+
+  .hero__content {
+    order: 2;
+  }
+
+  .hero__avatar {
+    order: 1;
+    margin: 0 auto;
+    width: 160px;
+    height: 160px;
+  }
+
+  .hero__avatar-inner {
+    font-size: 2.4rem;
+  }
+
   .hero__hello { justify-content: center; }
   .hero__about { margin: 0 auto 2rem; }
-  .hero__actions { justify-content: center; }
-  .hero__orb--1 { width: 300px; height: 300px; }
+  .hero__actions {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero__actions .btn {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+  }
+  .hero__orb--1 { width: 250px; height: 250px; top: -80px; left: -60px; }
+  .hero__orb--2 { width: 200px; height: 200px; }
+  .hero__name { font-size: clamp(2.2rem, 10vw, 3.5rem); }
 }

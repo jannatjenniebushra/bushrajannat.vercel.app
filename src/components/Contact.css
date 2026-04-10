@@ -137,5 +137,15 @@
 @media (max-width: 768px) {
   .contact__layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact__cta {
+    padding: 1.8rem;
+  }
+  .contact__cta-heading {
+    font-size: 1.6rem;
+  }
+  .contact__intro {
+    max-width: 100%;
   }
 }

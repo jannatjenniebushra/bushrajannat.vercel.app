@@ -2,7 +2,7 @@
 
 .research__list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr));
   gap: 1.4rem;
 }
 
@@ -69,4 +69,6 @@
 
 @media (max-width: 600px) {
   .research__list { grid-template-columns: 1fr; }
+  .research__card { padding: 1.4rem; }
+  .research__title { font-size: 0.97rem; }
 }
