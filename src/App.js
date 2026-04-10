@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import './App.css';
-import Navbar    from './components/Navbar';
-import Hero      from './components/Hero';
-import Skills    from './components/Skills';
-import Projects  from './components/Projects';
-import Research  from './components/Research';
-import Experience from './components/Experience';
-import Contact   from './components/Contact';
-import Footer    from './components/Footer';
+import Navbar      from './components/Navbar';
+import Hero        from './components/Hero';
+import Skills      from './components/Skills';
+import Projects    from './components/Projects';
+import Research    from './components/Research';
+import Experience  from './components/Experience';
+import Contact     from './components/Contact';
+import Footer      from './components/Footer';
+import Chatbot     from './Chatbot';
 
 // Scroll-reveal: adds .visible class when element enters viewport
 function useScrollReveal() {
@@ -50,6 +51,7 @@ export default function App() {
         </div>
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 }
