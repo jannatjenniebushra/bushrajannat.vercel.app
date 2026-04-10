@@ -4,50 +4,45 @@
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
+// Helper: set all CORS headers and return res for chaining
+function setCors(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  return res;
+}
 
 export default async function handler(req, res) {
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
-    return res.status(200).set(CORS_HEADERS).end();
+    setCors(res);
+    return res.status(200).end();
   }
 
   if (req.method !== "POST") {
-    return res
-      .status(405)
-      .set(CORS_HEADERS)
-      .json({ error: "Method not allowed" });
+    setCors(res);
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return res
-      .status(500)
-      .set(CORS_HEADERS)
-      .json({ error: "GEMINI_API_KEY environment variable is not set." });
+    setCors(res);
+    return res.status(500).json({ error: "GEMINI_API_KEY environment variable is not set." });
   }
 
   let body;
   try {
     body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
   } catch {
-    return res
-      .status(400)
-      .set(CORS_HEADERS)
-      .json({ error: "Invalid JSON body" });
+    setCors(res);
+    return res.status(400).json({ error: "Invalid JSON body" });
   }
 
   const { system, messages } = body ?? {};
 
   if (!messages || !Array.isArray(messages)) {
-    return res
-      .status(400)
-      .set(CORS_HEADERS)
-      .json({ error: "Missing or invalid messages array" });
+    setCors(res);
+    return res.status(400).json({ error: "Missing or invalid messages array" });
   }
 
   // Gemini uses "user" / "model" roles (not "assistant")
@@ -72,10 +67,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({ contents }),
     });
   } catch (networkErr) {
-    return res
-      .status(502)
-      .set(CORS_HEADERS)
-      .json({ error: `Network error reaching Gemini: ${networkErr.message}` });
+    setCors(res);
+    return res.status(502).json({ error: `Network error reaching Gemini: ${networkErr.message}` });
   }
 
   // Use text() then JSON.parse() for better error visibility
@@ -84,10 +77,8 @@ export default async function handler(req, res) {
   try {
     geminiData = JSON.parse(rawText);
   } catch {
-    return res
-      .status(502)
-      .set(CORS_HEADERS)
-      .json({ error: `Non-JSON response from Gemini: ${rawText.slice(0, 300)}` });
+    setCors(res);
+    return res.status(502).json({ error: `Non-JSON response from Gemini: ${rawText.slice(0, 300)}` });
   }
 
   if (!geminiRes.ok) {
@@ -95,10 +86,8 @@ export default async function handler(req, res) {
       geminiData?.error?.message ??
       geminiData?.error ??
       `Gemini API error ${geminiRes.status}`;
-    return res
-      .status(geminiRes.status)
-      .set(CORS_HEADERS)
-      .json({ error: errMsg });
+    setCors(res);
+    return res.status(geminiRes.status).json({ error: errMsg });
   }
 
   // Extract reply text from Gemini response shape
@@ -107,8 +96,6 @@ export default async function handler(req, res) {
     "Sorry, I received an empty response from Gemini.";
 
   // Return in Anthropic-compatible shape so the frontend doesn't need changes
-  return res
-    .status(200)
-    .set(CORS_HEADERS)
-    .json({ content: [{ type: "text", text: reply }] });
+  setCors(res);
+  return res.status(200).json({ content: [{ type: "text", text: reply }] });
 }
